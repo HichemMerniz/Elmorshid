@@ -1,4 +1,4 @@
-package com.hichemmerniz.elmorshid;
+package com.example.fluttertuto;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
