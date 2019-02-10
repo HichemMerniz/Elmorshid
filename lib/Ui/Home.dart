@@ -21,7 +21,7 @@ class stateHome extends State<Home>{
         title: new Text(
             'Elmorshid'
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.deepPurple,
       ),
       bottomNavigationBar: new BottomNavigationBar(items:[
         new BottomNavigationBarItem(icon: new Icon(Icons.home),title: new Text('home'),),
@@ -29,7 +29,8 @@ class stateHome extends State<Home>{
         new BottomNavigationBarItem(icon: new Icon(Icons.hotel),title: new Text('reservation'),),
         new BottomNavigationBarItem(icon: new Icon(Icons.map),title: new Text('map'),),
       ],
-        fixedColor: Colors.black54,
+        type: BottomNavigationBarType.fixed,
+        fixedColor: Colors.deepPurple,
       ),
       drawer: new Drawer(
         child: new Center(
