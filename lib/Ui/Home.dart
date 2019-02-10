@@ -25,7 +25,7 @@ class stateHome extends State<Home>{
       ),
       bottomNavigationBar: new BottomNavigationBar(items:[
         new BottomNavigationBarItem(icon: new Icon(Icons.home),title: new Text('home'),),
-        new BottomNavigationBarItem(icon: new Icon(Icons.place),title: new Text('place'),backgroundColor: Colors.deepPurple),
+        new BottomNavigationBarItem(icon: new Icon(Icons.place),title: new Text('place'),),
         new BottomNavigationBarItem(icon: new Icon(Icons.hotel),title: new Text('reservation'),),
         new BottomNavigationBarItem(icon: new Icon(Icons.map),title: new Text('map'),),
       ],
