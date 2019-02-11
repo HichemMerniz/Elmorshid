@@ -38,13 +38,26 @@ class stateHome extends State<Home>{
       bottomNavigationBar: new BottomNavigationBar(
           currentIndex:  _cIndex,
           items:[
-        new BottomNavigationBarItem(icon: new Icon(Icons.home),title: new Text('home'),),
-        new BottomNavigationBarItem(icon: new Icon(Icons.place),title: new Text('place'),),
-        new BottomNavigationBarItem(icon: new Icon(Icons.hotel),title: new Text('reservation'),),
-        new BottomNavigationBarItem(icon: new Icon(Icons.map),title: new Text('map'),),
+        new BottomNavigationBarItem(
+          icon: new Icon(Icons.home),
+          title: new Text('home'),
+        ),
+        new BottomNavigationBarItem(
+          icon: new Icon(Icons.place),
+          title: new Text('place'),
+        ),
+        new BottomNavigationBarItem(
+          icon: new Icon(Icons.hotel),
+          title: new Text('reservation'),
+        ),
+        new BottomNavigationBarItem(
+          icon: new Icon(Icons.map),
+          title: new Text('map'),
+        ),
       ],
         type: BottomNavigationBarType.fixed,
         fixedColor: Colors.deepPurple,
+
         onTap:(index){
           _incrementTab(index);
         }
@@ -52,18 +65,37 @@ class stateHome extends State<Home>{
 
       ),
       drawer: new Drawer(
-        child: new Center(
-            child: new Column(
-              children: <Widget>[
-                new ListView(
-                  padding: const EdgeInsets.all(32.2),
-                  children: <Widget>[
-                    new Text('Mounir')
-                  ],
-                )
-              ],
-
-            )
+        
+        child: ListView(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text("Hichem Merniz"),
+              accountEmail: Text("Hichembba97@gmail.com"),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor:
+                Theme.of(context).platform == TargetPlatform.iOS
+                    ? Colors.deepPurple
+                    : Colors.white,
+                child: Text(
+                  "H",
+                  style: TextStyle(fontSize: 40.0),
+                ),
+              ),
+            ),
+            
+            ListTile(
+              title: Text("Add voyage"),
+              trailing: Icon(Icons.add_circle,color: Colors.deepPurple,),
+            ),
+            ListTile(
+              title:Text('Profil') ,
+              trailing:Icon(Icons.person,color: Colors.deepPurple,) ,
+            ),
+            ListTile(
+              title: Text("Add place"),
+              trailing: Icon(Icons.add_location,color: Colors.deepPurple,),
+            ),
+          ],
         ),
       ),
       body: new Container(
