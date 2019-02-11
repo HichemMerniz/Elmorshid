@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:elmorshid/Ui/Map.dart';
+import 'package:elmorshid/Ui/addVoyage.dart';
+import 'package:elmorshid/Ui/addPlace.dart';
+import 'package:elmorshid/Ui/Profil.dart';
 
 class Home extends StatefulWidget{
   @override
@@ -23,6 +26,7 @@ class stateHome extends State<Home>{
 
 
 
+
   @override
   Widget build(BuildContext context) {
 
@@ -37,6 +41,7 @@ class stateHome extends State<Home>{
       ),
       bottomNavigationBar: new BottomNavigationBar(
           currentIndex:  _cIndex,
+
           items:[
         new BottomNavigationBarItem(
           icon: new Icon(Icons.home),
@@ -53,19 +58,20 @@ class stateHome extends State<Home>{
         new BottomNavigationBarItem(
           icon: new Icon(Icons.map),
           title: new Text('map'),
+
         ),
       ],
         type: BottomNavigationBarType.fixed,
         fixedColor: Colors.deepPurple,
+        onTap:(index)=> Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Map()),
+        ),
 
-        onTap:(index){
-          _incrementTab(index);
-        }
 
 
       ),
       drawer: new Drawer(
-        
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
@@ -85,20 +91,38 @@ class stateHome extends State<Home>{
             
             ListTile(
               title: Text("Add voyage"),
+              onTap:() => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => addVoyage()),
+              ),
               trailing: Icon(Icons.add_circle,color: Colors.deepPurple,),
             ),
             ListTile(
               title:Text('Profil') ,
               trailing:Icon(Icons.person,color: Colors.deepPurple,) ,
+              onTap:() => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Profil()),
+              ),
             ),
             ListTile(
               title: Text("Add place"),
               trailing: Icon(Icons.add_location,color: Colors.deepPurple,),
+              onTap:() => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => addPlace()),
+              ),
+
             ),
           ],
         ),
+
+      ),
+      floatingActionButton: new FloatingActionButton(
+          onPressed: null
       ),
       body: new Container(
+
         child: Card(
           semanticContainer: true,
           clipBehavior: Clip.antiAliasWithSaveLayer,
