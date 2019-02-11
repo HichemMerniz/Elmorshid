@@ -12,8 +12,20 @@ class Home extends StatefulWidget{
 
 
 class stateHome extends State<Home>{
+
+  int _cIndex = 0;
+
+  void _incrementTab(index) {
+    setState(() {
+      _cIndex = index;
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
+
 
     return new Scaffold(
       backgroundColor: Colors.deepPurple ,
@@ -23,7 +35,9 @@ class stateHome extends State<Home>{
         ),
         backgroundColor: Colors.deepPurple,
       ),
-      bottomNavigationBar: new BottomNavigationBar(items:[
+      bottomNavigationBar: new BottomNavigationBar(
+          currentIndex:  _cIndex,
+          items:[
         new BottomNavigationBarItem(icon: new Icon(Icons.home),title: new Text('home'),),
         new BottomNavigationBarItem(icon: new Icon(Icons.place),title: new Text('place'),),
         new BottomNavigationBarItem(icon: new Icon(Icons.hotel),title: new Text('reservation'),),
@@ -31,6 +45,11 @@ class stateHome extends State<Home>{
       ],
         type: BottomNavigationBarType.fixed,
         fixedColor: Colors.deepPurple,
+        onTap:(index){
+          _incrementTab(index);
+        }
+
+
       ),
       drawer: new Drawer(
         child: new Center(
