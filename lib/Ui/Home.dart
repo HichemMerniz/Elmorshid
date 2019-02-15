@@ -17,7 +17,36 @@ class Home extends StatefulWidget{
 class stateHome extends State<Home>{
 
   int _cIndex = 0;
-
+  void navigationTapped(int index) {
+    // Animating to the page.
+    // You can use whatever duration and curve you like
+    switch (index){
+      case 0 :
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Home()),
+        );
+        break;
+      case 1 :
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Profil()),
+        );
+        break;
+      case 2 :
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => addPlace()),
+        );
+        break;
+      case 3 :
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Map()),
+        );
+        break;
+    }
+  }
   void _incrementTab(index) {
     setState(() {
       _cIndex = index;
@@ -63,10 +92,7 @@ class stateHome extends State<Home>{
       ],
         type: BottomNavigationBarType.fixed,
         fixedColor: Colors.deepPurple,
-        onTap:(index)=> Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Map()),
-        ),
+        onTap:navigationTapped ,
 
 
 

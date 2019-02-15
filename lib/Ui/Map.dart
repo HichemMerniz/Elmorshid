@@ -8,24 +8,16 @@ class Map extends StatefulWidget{
   }
 
 }
-
-
 class mapState extends State<Map>{
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('Map') ,
-        backgroundColor: Colors.deepPurple,
+    return Scaffold(
+        appBar: new AppBar(
+          title: new Text('Map'),
+        )
 
-        iconTheme: IconThemeData(
-
-        ),
-
-      ),
     );
-
   }
-
 }
