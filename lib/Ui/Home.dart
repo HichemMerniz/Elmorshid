@@ -3,6 +3,8 @@ import 'package:elmorshid/Ui/Map.dart';
 import 'package:elmorshid/Ui/addVoyage.dart';
 import 'package:elmorshid/Ui/addPlace.dart';
 import 'package:elmorshid/Ui/Profil.dart';
+import 'package:elmorshid/Ui/Place.dart';
+import 'package:elmorshid/Ui/Reservation.dart';
 
 class Home extends StatefulWidget{
   @override
@@ -30,13 +32,13 @@ class stateHome extends State<Home>{
       case 1 :
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Profil()),
+          MaterialPageRoute(builder: (context) => Place()),
         );
         break;
       case 2 :
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => addPlace()),
+          MaterialPageRoute(builder: (context) => Reservation()),
         );
         break;
       case 3 :

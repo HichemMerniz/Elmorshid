@@ -4,15 +4,16 @@ import 'package:elmorshid/Ui/Place.dart';
 import 'package:elmorshid/Ui/Map.dart';
 import 'package:elmorshid/Ui/Home.dart';
 
-class Map extends StatefulWidget{
+
+class Place extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return mapState();
+    return placeState();
   }
 
 }
-class mapState extends State<Map>{
+class placeState extends State<Place>{
 
 
 
@@ -46,7 +47,7 @@ class mapState extends State<Map>{
         break;
     }
   }
-  int _cIndex=3;
+  int _cIndex=1;
   void _incrementTab(index) {
     setState(() {
       _cIndex = index;
@@ -59,7 +60,7 @@ class mapState extends State<Map>{
     // TODO: implement build
     return Scaffold(
         appBar: new AppBar(
-          title: new Text('Map'),
+          title: new Text('Place'),
         ),
       bottomNavigationBar: new BottomNavigationBar(
         currentIndex:  _cIndex,
