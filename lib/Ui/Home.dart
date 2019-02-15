@@ -17,12 +17,12 @@ class Home extends StatefulWidget{
 class stateHome extends State<Home>{
 
   int _cIndex = 0;
-
-  void _incrementTab(index) {
-    setState(() {
-      _cIndex = index;
-    });
-  }
+//
+//  void _incrementTab(index) {
+//    setState(() {
+//      _cIndex = index;
+//    });
+//  }
 
 
 
@@ -137,10 +137,14 @@ class stateHome extends State<Home>{
 
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Image.network(
-                'https://t-ec.bstatic.com/xdata/images/hotel/max500/163496958.jpg?k=565fdeef7141cc544d4bcfe314568fcc8cd75b6f17b68c1449794f4e0f256f9a&o=',
-                fit: BoxFit.fill,
-              ),
+//              Image.network(
+//                'https://t-ec.bstatic.com/xdata/images/hotel/max500/163496958.jpg?k=565fdeef7141cc544d4bcfe314568fcc8cd75b6f17b68c1449794f4e0f256f9a&o=',
+//                fit: BoxFit.fill,
+//              ),
+            Image.asset(
+              'assets/img/test.jpg',
+              fit: BoxFit.cover,
+            ),
               const ListTile(
                 leading: Icon(Icons.visibility),
                 title: Text('Place1'),

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>427956667776-ikj3li0lsr3mvvb3bju133ooloo01epo.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.427956667776-ikj3li0lsr3mvvb3bju133ooloo01epo</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBDkj50P-zRA-Pe2FA27Sx-5txvaF1S2Dk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>427956667776</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.fluttertuto</string>
+	<key>PROJECT_ID</key>
+	<string>elmorshidapp</string>
+	<key>STORAGE_BUCKET</key>
+	<string>elmorshidapp.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:427956667776:ios:35d144c60947eeb8</string>
+	<key>DATABASE_URL</key>
+	<string>https://elmorshidapp.firebaseio.com</string>
+</dict>
+</plist>
