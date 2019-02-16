@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:elmorshid/Ui/Reservation.dart';
 import 'package:elmorshid/Ui/Place.dart';
-import 'package:elmorshid/Ui/Map.dart';
 import 'package:elmorshid/Ui/Home.dart';
-
+import 'package:map_view/map_view.dart';
+var mykey = "AIzaSyCVmz1AzhIhVRLKHpo11ALECsYJyIAZqPA";
 class Map extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
+    MapView.setApiKey(mykey);
     // TODO: implement createState
     return mapState();
   }
 
 }
 class mapState extends State<Map>{
-
-
 
   void navigationTapped(int index) {
     // Animating to the page.
@@ -53,14 +52,34 @@ class mapState extends State<Map>{
     });
   }
 
-
+  MapView mapView = new MapView();
+  displayMap(){
+    mapView.show(new MapOptions(
+        mapViewType: MapViewType.normal,
+      initialCameraPosition: new CameraPosition(new Location(35.22, -101.83), 15.0),
+      showUserLocation: false,
+      title: 'Google Map'
+    ));
+  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-        appBar: new AppBar(
-          title: new Text('Map'),
+
+      appBar: new AppBar(
+        title: new Text('Map'),
+      ),
+      body: new Center(
+        child: Container(
+          child: RaisedButton(
+            child: Text("clicker"),
+            color: Colors.deepPurpleAccent,
+            textColor: Colors.white,
+            elevation: 7.0,
+            onPressed: displayMap,
+          ),
         ),
+      ),
       bottomNavigationBar: new BottomNavigationBar(
         currentIndex:  _cIndex,
 
