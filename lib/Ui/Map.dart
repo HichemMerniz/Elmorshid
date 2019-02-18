@@ -3,6 +3,15 @@ import 'package:elmorshid/Ui/Reservation.dart';
 import 'package:elmorshid/Ui/Place.dart';
 import 'package:elmorshid/Ui/Home.dart';
 //import 'package:map_view/map_view.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map/src/core/point.dart';
+import 'package:flutter_map/src/geo/crs/crs.dart';
+import 'package:flutter_map/src/map/flutter_map_state.dart';
+import 'package:flutter_map/src/map/map.dart';
+import 'package:flutter_map/src/plugins/plugin.dart';
+import 'package:latlong/latlong.dart';
 var mykey = "AIzaSyCVmz1AzhIhVRLKHpo11ALECsYJyIAZqPA";
 class Map extends StatefulWidget{
   @override
@@ -69,16 +78,22 @@ class mapState extends State<Map>{
       appBar: new AppBar(
         title: new Text('Map'),
       ),
-      body: new Center(
-        child: Container(
-          child: RaisedButton(
-            child: Text("clicker"),
-            color: Colors.deepPurpleAccent,
-            textColor: Colors.white,
-            elevation: 7.0,
-            //onPressed: displayMap,
-          ),
+      body: new FlutterMap(
+        options: new MapOptions(
+          center: new LatLng(56.704173, 11.543808),
+          zoom: 13.0,
         ),
+        layers: [
+          new TileLayerOptions(
+            urlTemplate: "https://api.mapbox.com/v4/"
+                "{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}",
+            additionalOptions: {
+              'accessToken': 'pk.eyJ1IjoibW91bmlyemVyIiwiYSI6ImNqc2FwenNsNTA0ZHo0M3FjdTVkenV2bGMifQ.t0F8krDaxhmxII5ZQu7xHA',
+              'id': 'mapbox.streets',
+            },
+          ),
+
+        ],
       ),
       bottomNavigationBar: new BottomNavigationBar(
         currentIndex:  _cIndex,

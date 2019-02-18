@@ -18,7 +18,6 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="flutter_tuto"
         android:icon="@mipmap/ic_launcher">
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCVmz1AzhIhVRLKHpo11ALECsYJyIAZqPA"/>
 
         <activity
             android:name=".MainActivity"
