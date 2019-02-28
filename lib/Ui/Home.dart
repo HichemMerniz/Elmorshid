@@ -4,6 +4,7 @@ import 'package:elmorshid/Ui/addVoyage.dart';
 import 'package:elmorshid/Ui/addPlace.dart';
 import 'package:elmorshid/Ui/Profil.dart';
 import 'package:elmorshid/Ui/Place.dart';
+import 'package:elmorshid/Ui/login.dart';
 import 'package:elmorshid/Ui/Reservation.dart';
 
 class Home extends StatefulWidget{
@@ -139,6 +140,15 @@ class stateHome extends State<Home>{
               onTap:() => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => addPlace()),
+              ),
+
+            ),
+            ListTile(
+              title: Text("login"),
+              trailing: Icon(Icons.person,color: Colors.deepPurple,),
+              onTap:() => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Login()),
               ),
 
             ),

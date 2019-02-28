@@ -80,7 +80,7 @@ class mapState extends State<Map>{
       ),
       body: new FlutterMap(
         options: new MapOptions(
-          center: new LatLng(56.704173, 11.543808),
+          center: new LatLng(40.73, -74.00),
           zoom: 13.0,
         ),
         layers: [
@@ -92,7 +92,24 @@ class mapState extends State<Map>{
               'id': 'mapbox.streets',
             },
           ),
+          new MarkerLayerOptions(markers: [
+            new Marker(
+              width: 45.0,
+              height: 45.0,
+              point: new LatLng(40.73, -74.00),
+              builder: (context) =>new Container(
+                child: IconButton(
+                    icon: Icon(Icons.location_on),
+                    onPressed: (){
+                      print('Marker tapped');
+                    },
+                    color : Colors.red,
+                    iconSize: 45.0,
 
+                ),
+              )
+            )
+          ])
         ],
       ),
       bottomNavigationBar: new BottomNavigationBar(

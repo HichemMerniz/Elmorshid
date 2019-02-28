@@ -16,7 +16,7 @@
     <application
 
         android:name="io.flutter.app.FlutterApplication"
-        android:label="flutter_tuto"
+        android:label="elmorshid - المرشد"
         android:icon="@mipmap/ic_launcher">
 
         <activity
