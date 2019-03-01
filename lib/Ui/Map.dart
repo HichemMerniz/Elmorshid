@@ -96,7 +96,7 @@ class mapState extends State<Map>{
             new Marker(
               width: 45.0,
               height: 45.0,
-              point: new LatLng(40.73, -74.00),
+              point: new LatLng(36.0686284,4.6991422),
               builder: (context) =>new Container(
                 child: IconButton(
                     icon: Icon(Icons.location_on),
