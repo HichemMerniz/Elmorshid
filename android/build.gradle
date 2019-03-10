@@ -7,8 +7,8 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
-        classpath 'com.google.gms:google-services:4.0.1'
-        classpath 'com.mapbox.mapboxsdk:mapbox-android-sdk:7.1.2'
+        classpath 'com.google.gms:google-services:4.0.1'      //used for firebase
+        classpath 'com.mapbox.mapboxsdk:mapbox-android-sdk:7.1.2'      //used for mapbox
     }
 }
 

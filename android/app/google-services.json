@@ -1,27 +1,35 @@
 {
   "project_info": {
-    "project_number": "168965367208",
-    "firebase_url": "https://elmorshid-5adb8.firebaseio.com",
-    "project_id": "elmorshid-5adb8",
-    "storage_bucket": "elmorshid-5adb8.appspot.com"
+    "project_number": "81695072348",
+    "firebase_url": "https://elmorshid-ba3e0.firebaseio.com",
+    "project_id": "elmorshid-ba3e0",
+    "storage_bucket": "elmorshid-ba3e0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:168965367208:android:35d144c60947eeb8",
+        "mobilesdk_app_id": "1:81695072348:android:35d144c60947eeb8",
         "android_client_info": {
           "package_name": "com.example.fluttertuto"
         }
       },
       "oauth_client": [
         {
-          "client_id": "168965367208-i61prea143lqolpd65qdp9d8mv9a9u10.apps.googleusercontent.com",
+          "client_id": "81695072348-segqpgcpnopnbau59n5evcrelhddds45.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fluttertuto",
+            "certificate_hash": "8d0d6c3bb7190669947c356e9f1e09a5e739a910"
+          }
+        },
+        {
+          "client_id": "81695072348-k4n0ftv8s6u9264qhrvo6hsm1kdm3e79.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA--pNpYU04aBbYjx33waNB5KTSwnrpU8s"
+          "current_key": "AIzaSyAxI6lzmii4EZvc50DlWF1d1V5BNrxzxQQ"
         }
       ],
       "services": {
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "81695072348-k4n0ftv8s6u9264qhrvo6hsm1kdm3e79.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

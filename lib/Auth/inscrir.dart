@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'inscrir.dart';
-class Login extends StatefulWidget{
+import 'package:elmorshid/Auth/Login.dart';
+class Inscrir extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
     //  MapView.setApiKey(mykey);
     // TODO: implement createState
-    return loginState();
+    return inscrirState();
   }
 
 }
-class loginState extends State<Login> {
+class inscrirState extends State<Inscrir> {
   @override
   Widget build(BuildContext context) {
 
@@ -22,6 +22,20 @@ class loginState extends State<Login> {
         child: Image.asset('assets/img/logo.png'),
       ),
     );
+
+
+    final email = TextFormField(
+      keyboardType: TextInputType.emailAddress,
+      autofocus: false,
+      decoration: InputDecoration(
+        hintText: "Votre email",
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32.0),
+        ),
+      ),
+    );
+
 
     final username = TextFormField(
       keyboardType: TextInputType.text,
@@ -49,7 +63,7 @@ class loginState extends State<Login> {
     );
 
 
-    final loginButton = Padding(
+    final inscrirButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 4.0),
       child: Material(
         borderRadius: BorderRadius.circular(30.0),
@@ -61,18 +75,18 @@ class loginState extends State<Login> {
             minWidth: 200.0,
             height: 42.0,
             color: Colors.deepPurple,
-            child: Text('Log In',style: TextStyle(color: Colors.white,fontSize: 20.0),),
+            child: Text('Inscrir',style: TextStyle(color: Colors.white,fontSize: 20.0),),
 
         ),
       ),
     );
 
 
-    final inscription = FlatButton(
-      child: Text('Iscrivez-Vous !',style: TextStyle(color: Colors.deepPurple),),
+    final loginButton = FlatButton(
+      child: Text('Log In !',style: TextStyle(color: Colors.deepPurple),),
       onPressed: () => Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => Inscrir()),
+        MaterialPageRoute(builder: (context) => Login()),
       ),
     );
 
@@ -86,12 +100,16 @@ class loginState extends State<Login> {
             children: <Widget>[
               logo,
               SizedBox(height: 30.0),
+              email,
+              SizedBox(height: 15.0),
               username,
               SizedBox(height: 15.0),
               password,
               SizedBox(height: 15.0),
-              loginButton,
-              inscription
+              password,
+              SizedBox(height: 15.0),
+              inscrirButton,
+              loginButton
             ],
           ),
         ),

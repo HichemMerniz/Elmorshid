@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:elmorshid/Ui/Home.dart';
+import 'package:elmorshid/Auth/Login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+
 
 
 
@@ -8,7 +11,7 @@ void main() {
   runApp(
     new MaterialApp(
 
-    home: new Home(),
+    home: Login(),
     title: 'Elmorchid',
     )
   );
