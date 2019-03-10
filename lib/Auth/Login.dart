@@ -19,67 +19,67 @@ class Login extends StatefulWidget {
 
 class loginState extends State<Login> {
   String _email, _password;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState> ();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final logo = Hero (
+    final logo = Hero(
       tag: 'elmorshid',
-      child: CircleAvatar (
+      child: CircleAvatar(
         backgroundColor: Colors.transparent,
         radius: 48.0,
-        child: Image.asset ('assets/img/logo.png'),
+        child: Image.asset('assets/img/logo.png'),
       ),
     );
 
     //----------------------email_input---------------------------------
 
-    final email = TextFormField (
+    final email = TextFormField(
       keyboardType: TextInputType.emailAddress,
       validator: (input) {},
       onSaved: (input) {},
       autofocus: false,
-      decoration: InputDecoration (
+      decoration: InputDecoration(
         hintText: "Email",
-        contentPadding: EdgeInsets.fromLTRB (20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder (
-          borderRadius: BorderRadius.circular (32.0),
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32.0),
         ),
       ),
     );
 
     //----------------------Password_input---------------------------------
 
-    final password = TextFormField (
+    final password = TextFormField(
       obscureText: true,
       autofocus: false,
       validator: (input) {},
       onSaved: (input) => _password = (input),
-      decoration: InputDecoration (
+      decoration: InputDecoration(
         hintText: "Password",
-        contentPadding: EdgeInsets.fromLTRB (20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder (
-          borderRadius: BorderRadius.circular (32.0),
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32.0),
         ),
       ),
     );
 
     //----------------------Login_button---------------------------------
 
-    final loginButton = Padding (
-      padding: EdgeInsets.symmetric (vertical: 4.0),
-      child: Material (
-        borderRadius: BorderRadius.circular (30.0),
+    final loginButton = Padding(
+      padding: EdgeInsets.symmetric(vertical: 4.0),
+      child: Material(
+        borderRadius: BorderRadius.circular(30.0),
         shadowColor: Colors.deepPurple.shade100,
         elevation: 5.0,
-        child: MaterialButton (
+        child: MaterialButton(
           //onPressed: () => login(),
           minWidth: 200.0,
           height: 42.0,
           color: Colors.deepPurple,
-          child: Text (
+          child: Text(
             'Log In',
-            style: TextStyle (color: Colors.white, fontSize: 20.0),
+            style: TextStyle(color: Colors.white, fontSize: 20.0),
           ),
         ),
       ),
@@ -87,33 +87,35 @@ class loginState extends State<Login> {
 
     //----------------------Google_button---------------------------------
 
-    final googleButton = Padding (
-      padding: EdgeInsets.symmetric (vertical: 4.0),
-      child: Material (
-        borderRadius: BorderRadius.circular (30.0),
+    final googleButton = Padding(
+      padding: EdgeInsets.symmetric(vertical: 4.0),
+      child: Material(
+        borderRadius: BorderRadius.circular(30.0),
         shadowColor: Colors.deepPurple.shade100,
         elevation: 5.0,
-        child: MaterialButton (
-          onPressed: () => _gSignin() ,
+        child: MaterialButton(
+          onPressed: () => _gSignin(),
           minWidth: 200.0,
           height: 42.0,
           color: Colors.deepPurple,
-          child: Text ("sign in with google"),
+          child: Text(
+            "sign in with google",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
     );
 
     //----------------------insecription---------------------------------
 
-    final inscription = FlatButton (
-      child: Text (
+    final inscription = FlatButton(
+      child: Text(
         'Iscrivez-Vous !',
-        style: TextStyle (color: Colors.deepPurple),
+        style: TextStyle(color: Colors.deepPurple),
       ),
-      onPressed: () =>
-          Navigator.push (
+      onPressed: () => Navigator.push(
             context,
-            MaterialPageRoute (builder: (context) => Inscrir ()),
+            MaterialPageRoute(builder: (context) => Inscrir()),
           ),
     );
 
@@ -123,16 +125,16 @@ class loginState extends State<Login> {
       backgroundColor: Colors.white,
       body: new Center(
         key: _formKey,
-        child: ListView (
+        child: ListView(
           shrinkWrap: true,
-          padding: EdgeInsets.only (left: 24.0, right: 24.0),
+          padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
             logo,
-            SizedBox (height: 30.0),
+            SizedBox(height: 30.0),
             email,
-            SizedBox (height: 15.0),
+            SizedBox(height: 15.0),
             password,
-            SizedBox (height: 15.0),
+            SizedBox(height: 15.0),
             loginButton,
             googleButton,
             inscription
@@ -143,36 +145,20 @@ class loginState extends State<Login> {
   }
 
 //-----------------------------login_function-----------------------------------
-  // ignore: missing_return
-//  Future<FirebaseUser> login() async {
-//    print("hello1");
-//    final formState = _formKey.currentState ;
-//
-//      formState.save();
-//      debugPrint("hello2");
-//      try{
-//        FirebaseUser user =  await FirebaseAuth.instance.signInWithEmailAndPassword(email: "hichembba97@gmail.com ", password: "12345");
-//        print("hello3");
-//
-//        Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-//        return user ;
-//      }catch(e){
-//        print(e.message);
-//
-//      }
-//
-//
-//
-//  }
+
   Future<FirebaseUser> _gSignin() async {
-    GoogleSignInAccount googleUser = await _googleSignIn.signIn ();
+    GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-    final AuthCredential credential = GoogleAuthProvider.getCredential (
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-    final FirebaseUser user = await _auth.signInWithCredential (credential);
-    print ("signed in " + user.displayName);
+    final FirebaseUser user = await _auth.signInWithCredential(credential);
+    print("signed in " + user.displayName);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Home()),
+    );
     return user;
   }
 }
