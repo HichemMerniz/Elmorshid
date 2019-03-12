@@ -4,6 +4,8 @@ import 'package:elmorshid/Ui/Home.dart';
 import 'inscrir.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
+
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn _googleSignIn = new GoogleSignIn();
@@ -93,16 +95,7 @@ class loginState extends State<Login> {
         borderRadius: BorderRadius.circular(30.0),
         shadowColor: Colors.deepPurple.shade100,
         elevation: 5.0,
-        child: MaterialButton(
-          onPressed: () => _gSignin(),
-          minWidth: 200.0,
-          height: 42.0,
-          color: Colors.deepPurple,
-          child: Text(
-            "sign in with google",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
+       child: GoogleSignInButton(onPressed: () => _gSignin()),
       ),
     );
 
@@ -137,7 +130,7 @@ class loginState extends State<Login> {
             SizedBox(height: 15.0),
             loginButton,
             googleButton,
-            inscription
+
           ],
         ),
       ),
@@ -161,4 +154,5 @@ class loginState extends State<Login> {
     );
     return user;
   }
+
 }

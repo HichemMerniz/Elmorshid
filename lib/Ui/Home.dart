@@ -7,42 +7,39 @@ import 'package:elmorshid/Ui/Place.dart';
 import 'package:elmorshid/Auth/Login.dart';
 import 'package:elmorshid/Ui/Reservation.dart';
 
-class Home extends StatefulWidget{
+class Home extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
     return new stateHome();
   }
-
 }
 
-
-class stateHome extends State<Home>{
-
+class stateHome extends State<Home> {
   int _cIndex = 0;
   void navigationTapped(int index) {
     // Animating to the page.
     // You can use whatever duration and curve you like
-    switch (index){
-      case 0 :
+    switch (index) {
+      case 0:
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => Home()),
         );
         break;
-      case 1 :
+      case 1:
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => Place()),
         );
         break;
-      case 2 :
+      case 2:
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => Reservation()),
         );
         break;
-      case 3 :
+      case 3:
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => Map()),
@@ -50,55 +47,44 @@ class stateHome extends State<Home>{
         break;
     }
   }
+
   void _incrementTab(index) {
     setState(() {
       _cIndex = index;
     });
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
-
-
     return new Scaffold(
-      backgroundColor: Colors.deepPurple ,
+      backgroundColor: Colors.deepPurple,
       appBar: new AppBar(
-        title: new Text(
-            'Elmorshid'
-        ),
+        title: new Text('Elmorshid'),
         backgroundColor: Colors.deepPurple,
       ),
       bottomNavigationBar: new BottomNavigationBar(
-          currentIndex:  _cIndex,
-
-          items:[
-        new BottomNavigationBarItem(
-          icon: new Icon(Icons.home),
-          title: new Text('home'),
-        ),
-        new BottomNavigationBarItem(
-          icon: new Icon(Icons.place),
-          title: new Text('place'),
-        ),
-        new BottomNavigationBarItem(
-          icon: new Icon(Icons.hotel),
-          title: new Text('reservation'),
-        ),
-        new BottomNavigationBarItem(
-          icon: new Icon(Icons.map),
-          title: new Text('map'),
-
-        ),
-      ],
+        currentIndex: _cIndex,
+        items: [
+          new BottomNavigationBarItem(
+            icon: new Icon(Icons.home),
+            title: new Text('home'),
+          ),
+          new BottomNavigationBarItem(
+            icon: new Icon(Icons.place),
+            title: new Text('place'),
+          ),
+          new BottomNavigationBarItem(
+            icon: new Icon(Icons.hotel),
+            title: new Text('reservation'),
+          ),
+          new BottomNavigationBarItem(
+            icon: new Icon(Icons.map),
+            title: new Text('map'),
+          ),
+        ],
         type: BottomNavigationBarType.fixed,
         fixedColor: Colors.deepPurple,
-        onTap:navigationTapped ,
-
-
-
+        onTap: navigationTapped,
       ),
       drawer: new Drawer(
         child: ListView(
@@ -108,59 +94,53 @@ class stateHome extends State<Home>{
               accountEmail: Text("Hichembba97@gmail.com"),
               currentAccountPicture: CircleAvatar(
                 backgroundColor:
-                Theme.of(context).platform == TargetPlatform.iOS
-                    ? Colors.deepPurple
-                    : Colors.white,
+                    Theme.of(context).platform == TargetPlatform.iOS
+                        ? Colors.deepPurple
+                        : Colors.white,
                 child: Text(
                   "H",
                   style: TextStyle(fontSize: 40.0),
                 ),
               ),
             ),
-            
             ListTile(
               title: Text("Add voyage"),
-              onTap:() => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => addVoyage()),
+              onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => addVoyage()),
+                  ),
+              trailing: Icon(
+                Icons.add_circle,
+                color: Colors.deepPurple,
               ),
-              trailing: Icon(Icons.add_circle,color: Colors.deepPurple,),
             ),
             ListTile(
-              title:Text('Profil') ,
-              trailing:Icon(Icons.person,color: Colors.deepPurple,) ,
-              onTap:() => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Profil()),
+              title: Text('Profil'),
+              trailing: Icon(
+                Icons.person,
+                color: Colors.deepPurple,
               ),
+              onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Profil()),
+                  ),
             ),
             ListTile(
               title: Text("Add place"),
-              trailing: Icon(Icons.add_location,color: Colors.deepPurple,),
-              onTap:() => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => addPlace()),
+              trailing: Icon(
+                Icons.add_location,
+                color: Colors.deepPurple,
               ),
-
-            ),
-            ListTile(
-              title: Text("login"),
-              trailing: Icon(Icons.person,color: Colors.deepPurple,),
-              onTap:() => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Login()),
-              ),
-
+              onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => addPlace()),
+                  ),
             ),
           ],
         ),
-
       ),
-      floatingActionButton: new FloatingActionButton(
-          onPressed: null
-      ),
+      floatingActionButton: new FloatingActionButton(onPressed: null),
       body: new Container(
-
         child: Card(
           semanticContainer: true,
           clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -170,27 +150,29 @@ class stateHome extends State<Home>{
           elevation: 5,
           margin: EdgeInsets.all(10),
           color: Colors.white,
-
           child: Column(
-
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Image.asset("assets/img/test.jpg",fit: BoxFit.cover,),
+              Image.asset(
+                "assets/img/test.jpg",
+                fit: BoxFit.cover,
+              ),
               const ListTile(
                 leading: Icon(Icons.visibility),
                 title: Text('Place1'),
                 subtitle: Text('Discription of place 1 .'),
               ),
-              ButtonTheme.bar( // make buttons use the appropriate styles for cards
+              ButtonTheme.bar(
+                // make buttons use the appropriate styles for cards
                 child: ButtonBar(
                   children: <Widget>[
                     FlatButton(
                       child: const Text('BUY TICKETS'),
-                      onPressed: () { /* ... */ },
+                      onPressed: () {/* ... */},
                     ),
                     FlatButton(
                       child: const Text('Visit'),
-                      onPressed: () { /* ... */ },
+                      onPressed: () {/* ... */},
                     ),
                   ],
                 ),
@@ -201,5 +183,4 @@ class stateHome extends State<Home>{
       ),
     );
   }
-
 }
