@@ -2,28 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:elmorshid/Ui/Reservation.dart';
 import 'package:elmorshid/Ui/Place.dart';
 import 'package:elmorshid/Ui/Home.dart';
-//import 'package:map_view/map_view.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_map/src/core/point.dart';
-import 'package:flutter_map/src/geo/crs/crs.dart';
-import 'package:flutter_map/src/map/flutter_map_state.dart';
-import 'package:flutter_map/src/map/map.dart';
-import 'package:flutter_map/src/plugins/plugin.dart';
-import 'package:latlong/latlong.dart';
-var mykey = "AIzaSyCVmz1AzhIhVRLKHpo11ALECsYJyIAZqPA";
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'dart:async';
 class Map extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
-  //  MapView.setApiKey(mykey);
+    //  MapView.setApiKey(mykey);
     // TODO: implement createState
     return mapState();
   }
 
 }
 class mapState extends State<Map>{
-
+  Completer<GoogleMapController> _controller = Completer();
   void navigationTapped(int index) {
     // Animating to the page.
     // You can use whatever duration and curve you like
@@ -61,15 +52,6 @@ class mapState extends State<Map>{
     });
   }
 
-//  MapView mapView = new MapView();
-//  displayMap(){
-//    mapView.show(new MapOptions(
-//        mapViewType: MapViewType.normal,
-//      initialCameraPosition: new CameraPosition(new Location(35.22, -101.83), 15.0),
-//      showUserLocation: false,
-//      title: 'Google Map'
-//    ));
-//  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -78,38 +60,10 @@ class mapState extends State<Map>{
       appBar: new AppBar(
         title: new Text('Map'),
       ),
-      body: new FlutterMap(
-        options: new MapOptions(
-          center: new LatLng(40.73, -74.00),
-          zoom: 13.0,
-        ),
-        layers: [
-          new TileLayerOptions(
-            urlTemplate: "https://api.mapbox.com/v4/"
-                "{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}",
-            additionalOptions: {
-              'accessToken': 'pk.eyJ1IjoibW91bmlyemVyIiwiYSI6ImNqc2FwenNsNTA0ZHo0M3FjdTVkenV2bGMifQ.t0F8krDaxhmxII5ZQu7xHA',
-              'id': 'mapbox.streets',
-            },
-          ),
-          new MarkerLayerOptions(markers: [
-            new Marker(
-              width: 45.0,
-              height: 45.0,
-              point: new LatLng(36.0686284,4.6991422),
-              builder: (context) =>new Container(
-                child: IconButton(
-                    icon: Icon(Icons.location_on),
-                    onPressed: (){
-                      print('Marker tapped');
-                    },
-                    color : Colors.red,
-                    iconSize: 45.0,
+      body: Stack(
+        children: <Widget>[
+          _googlemap(context),
 
-                ),
-              )
-            )
-          ])
         ],
       ),
       bottomNavigationBar: new BottomNavigationBar(
@@ -142,6 +96,19 @@ class mapState extends State<Map>{
 
       ),
 
+    );
+  }
+  Widget _googlemap(BuildContext context){
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: GoogleMap(
+        mapType : MapType.normal,
+        initialCameraPosition: CameraPosition(target: LatLng(40.712776, -74.005974), zoom: 12),
+        onMapCreated: (GoogleMapController controller){
+          _controller.complete(controller);
+        },
+      ),
     );
   }
 }
