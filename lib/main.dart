@@ -9,12 +9,12 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 void main() {
 
-    return runApp(
-        new MaterialApp(
-          home: _handleCurrentScreen(),
-          title: 'Elmorchid',
-        )
-    );
+  return runApp(
+      new MaterialApp(
+        home: _handleCurrentScreen(),
+        title: 'Elmorchid',
+      )
+  );
 
 }
 

@@ -4,7 +4,9 @@ import 'package:elmorshid/Ui/Place.dart';
 import 'package:elmorshid/Ui/Home.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
-class Map extends StatefulWidget{
+import 'package:flutter/services.dart';
+import 'package:location/location.dart';
+class map extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
     //  MapView.setApiKey(mykey);
@@ -13,7 +15,7 @@ class Map extends StatefulWidget{
   }
 
 }
-class mapState extends State<Map>{
+class mapState extends State<map>{
   Completer<GoogleMapController> _controller = Completer();
   void navigationTapped(int index) {
     // Animating to the page.
@@ -40,7 +42,7 @@ class mapState extends State<Map>{
       case 3 :
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Map()),
+          MaterialPageRoute(builder: (context) => map()),
         );
         break;
     }
@@ -51,7 +53,23 @@ class mapState extends State<Map>{
       _cIndex = index;
     });
   }
-
+  Map<String, double> currentLocation = new Map();
+  StreamSubscription<Map<String,double>> locationSubscription;
+  Location location = new Location();
+  String error ;
+  @override
+  void initState(){
+    super.initState();
+    //default variables set is 0
+    currentLocation['latitude'] = 0.0;
+    currentLocation['longitude'] = 0.0;
+    initPlatformState();
+    locationSubscription = location.onLocationChanged().listen((Map<String,double> result){
+      setState(() {
+        currentLocation = result;
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -104,11 +122,30 @@ class mapState extends State<Map>{
       width: MediaQuery.of(context).size.width,
       child: GoogleMap(
         mapType : MapType.normal,
-        initialCameraPosition: CameraPosition(target: LatLng(40.712776, -74.005974), zoom: 12),
+        initialCameraPosition: CameraPosition(target: LatLng(currentLocation['latitude'].toDouble(), currentLocation['longitude'].toDouble()), zoom: 12),
         onMapCreated: (GoogleMapController controller){
           _controller.complete(controller);
         },
       ),
     );
+  }
+
+  Future initPlatformState() async {
+    Map<String,double> mylocation;
+    try{
+      mylocation = await location.getLocation();
+      error = '';
+    }on PlatformException catch(e){
+      if(e.code == "PERMISSION_DENIED")
+        error = 'permission denied';
+      else{
+        error = 'please go to settings !';
+      }
+      mylocation = null ;
+    }
+    setState(() {
+      currentLocation = mylocation;
+
+    });
   }
 }

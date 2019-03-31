@@ -47,7 +47,7 @@ class stateHome extends State<Home> {
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Map()),
+          MaterialPageRoute(builder: (context) => map()),
         );
         break;
     }

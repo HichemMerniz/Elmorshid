@@ -42,7 +42,7 @@ class placeState extends State<Place>{
       case 3 :
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Map()),
+          MaterialPageRoute(builder: (context) => map()),
         );
         break;
     }
