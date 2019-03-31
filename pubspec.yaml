@@ -23,6 +23,8 @@ dependencies:
   flutter_auth_buttons: ^0.3.1
   google_sign_in: ^3.0.3
   firebase_database: 1.0.5
+  splashscreen:
+  firebase_storage: 1.0.4
 
 
 #

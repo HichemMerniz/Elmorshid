@@ -139,6 +139,8 @@ class loginState extends State<Login> {
 
 //-----------------------------login_function-----------------------------------
 
+
+
   Future<FirebaseUser> _gSignin() async {
     GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     GoogleSignInAuthentication googleAuth = await googleUser.authentication;

@@ -5,7 +5,9 @@ import 'package:elmorshid/Ui/addPlace.dart';
 import 'package:elmorshid/Ui/Profil.dart';
 import 'package:elmorshid/Ui/Place.dart';
 import 'package:elmorshid/Auth/Login.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:elmorshid/Ui/Reservation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -15,8 +17,11 @@ class Home extends StatefulWidget {
   }
 }
 
+final _user = new Login();
+
 class stateHome extends State<Home> {
   int _cIndex = 0;
+
   void navigationTapped(int index) {
     // Animating to the page.
     // You can use whatever duration and curve you like
@@ -54,8 +59,29 @@ class stateHome extends State<Home> {
     });
   }
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = new GoogleSignIn();
+
+  Future<FirebaseUser> _gSignin() async {
+    GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+    GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    final FirebaseUser user = await _auth.signInWithCredential(credential);
+    print("signed in " + user.displayName);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Home()),
+    );
+    return user;
+  }
+
   @override
   Widget build(BuildContext context) {
+    var user = new stateHome();
+
     return new Scaffold(
       backgroundColor: Colors.deepPurple,
       appBar: new AppBar(
@@ -90,7 +116,7 @@ class stateHome extends State<Home> {
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: Text("Hichem Merniz"),
+              accountName: Text("hichem"),
               accountEmail: Text("Hichembba97@gmail.com"),
               currentAccountPicture: CircleAvatar(
                 backgroundColor:
@@ -168,11 +194,15 @@ class stateHome extends State<Home> {
                   children: <Widget>[
                     FlatButton(
                       child: const Text('BUY TICKETS'),
-                      onPressed: () {/* ... */},
+                      onPressed: () {
+                        /* ... */
+                      },
                     ),
                     FlatButton(
                       child: const Text('Visit'),
-                      onPressed: () {/* ... */},
+                      onPressed: () {
+                        /* ... */
+                      },
                     ),
                   ],
                 ),
