@@ -41,7 +41,7 @@ class resrvState extends State<Reservation>{
       case 3 :
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Map()),
+          MaterialPageRoute(builder: (context) => map()),
         );
         break;
     }
