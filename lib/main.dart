@@ -11,14 +11,14 @@ void main() {
 
     return runApp(
         new MaterialApp(
-          home: _handleCurrentScreen(),
+          home: chargementPage(),
           title: 'Elmorchid',
         )
     );
 
 }
 
-Widget _handleCurrentScreen() {
+Widget chargementPage() {
   return new StreamBuilder<FirebaseUser>(
       stream: FirebaseAuth.instance.onAuthStateChanged,
       builder: (BuildContext context, snapshot) {
