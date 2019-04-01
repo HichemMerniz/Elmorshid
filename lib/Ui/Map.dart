@@ -61,8 +61,7 @@ class mapState extends State<map>{
   void initState(){
     super.initState();
     //default variables set is 0
-    currentLocation['latitude'] = 0.0;
-    currentLocation['longitude'] = 0.0;
+
     initPlatformState();
     locationSubscription = location.onLocationChanged().listen((Map<String,double> result){
       setState(() {
@@ -122,7 +121,7 @@ class mapState extends State<map>{
       width: MediaQuery.of(context).size.width,
       child: GoogleMap(
         mapType : MapType.normal,
-        initialCameraPosition: CameraPosition(target: LatLng(currentLocation['latitude'].toDouble(), currentLocation['longitude'].toDouble()), zoom: 12),
+        initialCameraPosition: CameraPosition(target: LatLng(currentLocation['latitude'], currentLocation['longitude']), zoom: 12),
         onMapCreated: (GoogleMapController controller){
           _controller.complete(controller);
         },

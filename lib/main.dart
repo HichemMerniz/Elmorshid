@@ -4,6 +4,7 @@ import 'package:elmorshid/Auth/Login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:elmorshid/Ui/Map.dart';
 
 
 
@@ -11,7 +12,7 @@ void main() {
 
   return runApp(
       new MaterialApp(
-        home: _handleCurrentScreen(),
+        home: map(),
         title: 'Elmorchid',
       )
   );
