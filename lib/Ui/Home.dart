@@ -84,10 +84,12 @@ class stateHome extends State<Home> {
 
     return new Scaffold(
       backgroundColor: Colors.deepPurple,
+
       appBar: new AppBar(
         title: new Text('Elmorshid'),
         backgroundColor: Colors.deepPurple,
       ),
+
       bottomNavigationBar: new BottomNavigationBar(
         currentIndex: _cIndex,
         items: [
@@ -116,17 +118,43 @@ class stateHome extends State<Home> {
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: Text("hichem"),
-              accountEmail: Text("Hichembba97@gmail.com"),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor:
-                    Theme.of(context).platform == TargetPlatform.iOS
-                        ? Colors.deepPurple
-                        : Colors.white,
-                child: Text(
-                  "H",
-                  style: TextStyle(fontSize: 40.0),
-                ),
+         accountName: FutureBuilder(
+                future: FirebaseAuth.instance.currentUser(),
+                builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
+                  if (snapshot.hasData) {
+                    return Text(snapshot.data.displayName);
+                  }
+                  else {
+                    return Text('Loading...!!!');
+                  }
+                },
+              ),
+
+              accountEmail: FutureBuilder(
+                future: FirebaseAuth.instance.currentUser(),
+                builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
+                  if (snapshot.hasData) {
+                    return Text(snapshot.data.email);
+                  }
+                  else {
+                    return Text('Loading...!!');
+                  }
+                },
+              ),
+              currentAccountPicture: FutureBuilder(
+                future: FirebaseAuth.instance.currentUser(),
+                builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
+                  if (snapshot.hasData) {
+                    return CircleAvatar(
+                      backgroundImage: NetworkImage(snapshot.data.photoUrl) ,
+                    );
+                  }
+                  else {
+                    return CircleAvatar(
+                      backgroundImage: AssetImage("assets/img/man.png"),
+                    );
+                  }
+                },
               ),
             ),
             ListTile(
@@ -140,6 +168,7 @@ class stateHome extends State<Home> {
                 color: Colors.deepPurple,
               ),
             ),
+
             ListTile(
               title: Text('Profil'),
               trailing: Icon(

@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:elmorshid/Ui/Home.dart';
 import 'inscrir.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn _googleSignIn = new GoogleSignIn();
+final  database = FirebaseDatabase.instance.reference();
 
 class Login extends StatefulWidget {
   @override
@@ -150,10 +152,16 @@ class loginState extends State<Login> {
     );
     final FirebaseUser user = await _auth.signInWithCredential(credential);
     print("signed in " + user.displayName);
+    database.child("test").set({
+      "name":"hichem",
+      "email": "Hichembba97@gmail.com"
+    });
+
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => Home()),
     );
+
     return user;
   }
 

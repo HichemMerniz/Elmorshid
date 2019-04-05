@@ -16,10 +16,16 @@ class profilState extends State<Profil>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-        appBar: new AppBar(
-          title: new Text('Profil'),
+
+      body: CircleAvatar(
+
+        child : new Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Image.asset("assets/img/man.png"),
+          ],
         ),
-      body: ,
+      ) ,
 
     );
   }
