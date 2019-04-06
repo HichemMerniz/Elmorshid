@@ -75,12 +75,37 @@ class stateHome extends State<Home> {
       context,
       MaterialPageRoute(builder: (context) => Home()),
     );
+    FutureBuilder(
+      future: FirebaseAuth.instance.currentUser(),
+      builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
+        if (snapshot.hasData) {
+          database.reference().child("Userrs").set({
+            "name" :snapshot.data.displayName,
+            "email": snapshot.data.email,
+            "tel" : snapshot.data.phoneNumber,
+          });
+        }
+
+      },
+    );
     return user;
   }
 
   @override
   Widget build(BuildContext context) {
     var user = new stateHome();
+
+
+    void _setMessage(){
+
+            database.reference().child("Userrs").set({
+              "name" :"Hichem",
+              "email": "Hichembba97@gmail.com",
+            });
+
+
+
+    }
 
     return new Scaffold(
       backgroundColor: Colors.deepPurple,
@@ -194,7 +219,10 @@ class stateHome extends State<Home> {
           ],
         ),
       ),
-      floatingActionButton: new FloatingActionButton(onPressed: null),
+      floatingActionButton: new FloatingActionButton(
+          onPressed: _setMessage ,
+        child: Icon(Icons.add_box , color: Colors.white)
+      ),
       body: new Container(
         child: Card(
           semanticContainer: true,

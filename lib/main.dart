@@ -11,7 +11,8 @@ void main() {
 
     return runApp(
         new MaterialApp(
-          home: Home(),
+          home: chargementPage(),
+          debugShowCheckedModeBanner: false,
           title: 'Elmorchid',
         )
     );
