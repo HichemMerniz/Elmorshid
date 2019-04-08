@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:elmorshid/Ui/Reservation.dart';
-import 'package:elmorshid/Ui/Place.dart';
+import 'package:elmorshid/Ui/Place_Avitivity.dart';
 import 'package:elmorshid/Ui/Home.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
@@ -31,7 +31,7 @@ class mapState extends State<map> {
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Place()),
+          MaterialPageRoute(builder: (context) => placeAvtivity()),
         );
         break;
       case 2:

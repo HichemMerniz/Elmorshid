@@ -4,7 +4,7 @@ import 'package:elmorshid/Ui/Map.dart';
 import 'package:elmorshid/Ui/Home.dart';
 
 
-class Place extends StatefulWidget{
+class placeAvtivity extends StatefulWidget{
 
 
   @override
@@ -14,7 +14,7 @@ class Place extends StatefulWidget{
   }
 
 }
-class placeState extends State<Place>{
+class placeState extends State<placeAvtivity>{
 
 
 
@@ -31,7 +31,7 @@ class placeState extends State<Place>{
       case 1 :
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Place()),
+          MaterialPageRoute(builder: (context) => placeAvtivity()),
         );
         break;
       case 2 :
@@ -60,9 +60,9 @@ class placeState extends State<Place>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-        appBar: new AppBar(
-          title: new Text('Place'),
-        ),
+      appBar: new AppBar(
+        title: new Text('Place'),
+      ),
       bottomNavigationBar: new BottomNavigationBar(
         currentIndex:  _cIndex,
 

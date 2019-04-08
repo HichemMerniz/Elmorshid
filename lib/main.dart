@@ -36,7 +36,7 @@ Widget chargementPage() {
           );
         } else {
           if (snapshot.hasData) {
-            return new Home ();
+            return new Home();
 
           }
           return new Login();

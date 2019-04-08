@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:firebase_database/firebase_database.dart';
 
 class Profil extends StatefulWidget{
   @override
@@ -9,8 +9,22 @@ class Profil extends StatefulWidget{
   }
 
 }
-
+final FirebaseDatabase database = FirebaseDatabase(); 
 class profilState extends State<Profil>{
+
+
+//   void read(){
+//     setState(() {
+//       database.reference().child("test").once().then(
+//               (DataSnapshot snapshot){
+//             Map<dynamic,dynamic> data = snapshot.value ;
+//             print("value is db  : ${data.values}");
+//           });
+//     });
+//
+//   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +32,6 @@ class profilState extends State<Profil>{
     return Scaffold(
 
       body: CircleAvatar(
-
         child : new Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -26,6 +39,7 @@ class profilState extends State<Profil>{
           ],
         ),
       ) ,
+
 
     );
   }

@@ -3,8 +3,10 @@ import 'package:elmorshid/Ui/Map.dart';
 import 'package:elmorshid/Ui/addVoyage.dart';
 import 'package:elmorshid/Ui/addPlace.dart';
 import 'package:elmorshid/Ui/Profil.dart';
-import 'package:elmorshid/Ui/Place.dart';
+import 'package:elmorshid/Ui/Place_Avitivity.dart';
+import 'package:elmorshid/Models/place.dart';
 import 'package:elmorshid/Auth/Login.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:elmorshid/Ui/Reservation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -20,6 +22,21 @@ class Home extends StatefulWidget {
 final _user = new Login();
 
 class stateHome extends State<Home> {
+
+  List<Place> place_liste = List() ;
+  Place place ;
+  final FirebaseDatabase database = FirebaseDatabase();
+  final GlobalKey<FormState> formkey = GlobalKey<FormState>() ;
+  DatabaseReference databasereference ;
+
+  @override
+  void initState(){
+    super.initState();
+    place = new Place("","");
+    databasereference = database.reference().child("places");
+    databasereference.onChildAdded.listen(_onEntryAdd) ;
+  }
+
   int _cIndex = 0;
 
   void navigationTapped(int index) {
@@ -35,7 +52,7 @@ class stateHome extends State<Home> {
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Place()),
+          MaterialPageRoute(builder: (context) => placeAvtivity()),
         );
         break;
       case 2:
@@ -61,6 +78,7 @@ class stateHome extends State<Home> {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = new GoogleSignIn();
+
 
   Future<FirebaseUser> _gSignin() async {
     GoogleSignInAccount googleUser = await _googleSignIn.signIn();
@@ -166,6 +184,7 @@ class stateHome extends State<Home> {
                   }
                 },
               ),
+
               currentAccountPicture: FutureBuilder(
                 future: FirebaseAuth.instance.currentUser(),
                 builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
@@ -269,5 +288,11 @@ class stateHome extends State<Home> {
         ),
       ),
     );
+  }
+
+  void _onEntryAdd(Event event) {
+    setState(() {
+      place_liste.add(Place.fromSnapshot(event.snapshot));
+    });
   }
 }
