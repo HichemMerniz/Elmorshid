@@ -17,7 +17,7 @@ class map extends StatefulWidget {
 }
 
 class mapState extends State<map> {
-  Completer<GoogleMapController> _controller = Completer();
+  //GoogleMapController mapController;
   void navigationTapped(int index) {
     // Animating to the page.
     // You can use whatever duration and curve you like
@@ -117,16 +117,39 @@ class mapState extends State<map> {
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      child: GoogleMap(
+      child: Stack(children: <Widget>[
+      GoogleMap(
         mapType: MapType.normal,
         initialCameraPosition: CameraPosition(
             target: LatLng(
                 currentLocation['latitude'], currentLocation['longitude']),
-            zoom: 12),
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
+            zoom: 25),
+        onMapCreated: _onMapCreated,
+        myLocationEnabled: true,
+
       ),
+      Positioned(
+          bottom: 10,
+          right: 10,
+          left: 10,
+          child: 
+          FlatButton(
+              onPressed: _addmarker,
+              child: new Center(
+                child: new Row(
+                  children: <Widget>[
+
+                    Icon(Icons.pin_drop, color: Colors.white,),
+                    new Text('Add this place !'),
+                  ],
+                ),
+              ) ,
+              textColor: Colors.white,
+              color: Colors.deepPurple,
+          ),
+      ),
+      ],),
+
     );
   }
 
@@ -146,5 +169,21 @@ class mapState extends State<map> {
     setState(() {
       currentLocation = mylocation;
     });
+  }
+
+  GoogleMapController mapController;
+
+  _onMapCreated(GoogleMapController controller) {
+      setState(() {
+           mapController = controller;
+      });
+  }
+  _addmarker() {
+    var marker = MarkerOptions(
+        position: mapController.cameraPosition.target,
+        icon: BitmapDescriptor.defaultMarker,
+        infoWindowText: InfoWindowText('Place title','lkflkdlfk'),
+    );
+    mapController.addMarker(marker);
   }
 }
