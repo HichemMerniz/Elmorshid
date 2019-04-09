@@ -11,7 +11,7 @@ void main() {
 
     return runApp(
         new MaterialApp(
-          home: map(),
+          home: chargementPage(),
           debugShowCheckedModeBanner: false,
           title: 'Elmorchid',
         )

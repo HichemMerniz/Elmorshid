@@ -44,6 +44,9 @@ class addpState extends State<addPlace> {
                     ListTile(
                       leading: Icon(Icons.subject),
                       title: TextFormField(
+                        decoration: InputDecoration(
+                          hintText: "Title"
+                        ),
                         initialValue: "",
                         onSaved: (val) => place.title_place = val,
                         validator: (val) => val == "" ? val : null,
@@ -52,6 +55,9 @@ class addpState extends State<addPlace> {
                     ListTile(
                       leading: Icon(Icons.description),
                       title: TextFormField(
+                        decoration: InputDecoration(
+                            hintText: "Discription"
+                        ),
                         initialValue: "",
                         onSaved: (val) => place.discription_place = val,
                         validator: (val) => val == "" ? val : null,

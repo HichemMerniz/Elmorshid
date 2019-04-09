@@ -10,6 +10,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:elmorshid/Ui/Reservation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -242,52 +243,65 @@ class stateHome extends State<Home> {
           onPressed: _setMessage ,
         child: Icon(Icons.add_box , color: Colors.white)
       ),
-      body: new Container(
-        child: Card(
-          semanticContainer: true,
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          elevation: 5,
-          margin: EdgeInsets.all(10),
-          color: Colors.white,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Image.asset(
-                "assets/img/test.jpg",
-                fit: BoxFit.cover,
-              ),
-              const ListTile(
-                leading: Icon(Icons.visibility),
-                title: Text('Place1'),
-                subtitle: Text('Discription of place 1 .'),
-              ),
-              ButtonTheme.bar(
-                // make buttons use the appropriate styles for cards
-                child: ButtonBar(
-                  children: <Widget>[
-                    FlatButton(
-                      child: const Text('BUY TICKETS'),
-                      onPressed: () {
-                        /* ... */
-                      },
-                    ),
-                    FlatButton(
-                      child: const Text('Visit'),
-                      onPressed: () {
-                        /* ... */
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+
+     body:Column(
+       children: <Widget>[
+         Flexible(
+             child: FirebaseAnimatedList(
+                 query: databasereference,
+                 itemBuilder: (_,DataSnapshot snapshot,Animation<double> animation , int index){
+                   return new Card(
+                     semanticContainer: true,
+                     clipBehavior: Clip.antiAliasWithSaveLayer,
+                     shape: RoundedRectangleBorder(
+                       borderRadius: BorderRadius.circular(10.0),
+                     ),
+                     elevation: 5,
+                     margin: EdgeInsets.all(10),
+                     color: Colors.white,
+                     child: Column(
+                       mainAxisSize: MainAxisSize.min,
+                       children: <Widget>[
+                         Image.asset(
+                           "assets/img/test.jpg",
+                           fit: BoxFit.cover,
+                         ),
+                         ListTile(
+                           leading: Icon(Icons.visibility),
+                           title: Text(place_liste[index].title_place),
+                           subtitle: Text(place_liste[index].discription_place),
+                         ),
+                         ButtonTheme.bar(
+                           // make buttons use the appropriate styles for cards
+                           child: ButtonBar(
+                             children: <Widget>[
+                               FlatButton(
+                                 child: const Text('BUY TICKETS'),
+                                 onPressed: () {
+                                   /* ... */
+                                 },
+                               ),
+                               FlatButton(
+                                 child: const Text('Visit'),
+                                 onPressed: () {
+                                   /* ... */
+                                 },
+                               ),
+                             ],
+                           ),
+                         ),
+                       ],
+                     ),
+                   );
+                 }
+             )
+         )
+       ],
+     )
+
+
     );
+
   }
 
   void _onEntryAdd(Event event) {
