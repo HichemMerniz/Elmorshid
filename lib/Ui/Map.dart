@@ -17,7 +17,7 @@ class map extends StatefulWidget {
 }
 
 class mapState extends State<map> {
-  //GoogleMapController mapController;
+  GoogleMapController mapController;
   void navigationTapped(int index) {
     // Animating to the page.
     // You can use whatever duration and curve you like
@@ -119,14 +119,15 @@ class mapState extends State<map> {
       width: MediaQuery.of(context).size.width,
       child: Stack(children: <Widget>[
       GoogleMap(
-        mapType: MapType.normal,
+        mapType: MapType.hybrid,
         initialCameraPosition: CameraPosition(
             target: LatLng(
-                currentLocation['latitude'], currentLocation['longitude']),
-            zoom: 25),
+                12.00, 10.00),
+            zoom: 15),
         onMapCreated: _onMapCreated,
         myLocationEnabled: true,
-
+        compassEnabled: true,
+        trackCameraPosition: true,
       ),
       Positioned(
           bottom: 10,
@@ -152,7 +153,11 @@ class mapState extends State<map> {
 
     );
   }
-
+  _onMapCreated(GoogleMapController controller) {
+    setState(() {
+      mapController = controller;
+    });
+  }
   Future initPlatformState() async {
     Map<String, double> mylocation;
     try {
@@ -171,19 +176,16 @@ class mapState extends State<map> {
     });
   }
 
-  GoogleMapController mapController;
 
-  _onMapCreated(GoogleMapController controller) {
-      setState(() {
-           mapController = controller;
-      });
-  }
+
   _addmarker() {
     var marker = MarkerOptions(
         position: mapController.cameraPosition.target,
         icon: BitmapDescriptor.defaultMarker,
-        infoWindowText: InfoWindowText('Place title','lkflkdlfk'),
+        infoWindowText: InfoWindowText('Place title','kjhrhdf'),
     );
     mapController.addMarker(marker);
+    print('marker add !');
   }
+
 }
