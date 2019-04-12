@@ -177,8 +177,26 @@ class mapState extends State<map> {
   }
 
 
+  createAlertDialog(BuildContext context){
+    TextEditingController mycontroller = TextEditingController();
 
+    return showDialog(context: context,builder: (context){
+      return AlertDialog(
+        title: Text('Add this position'),
+        content: TextField(
+          controller: mycontroller,
+        ),
+        actions: <Widget>[
+          MaterialButton(
+            child: Text("Add"),
+            onPressed: () {},
+          ),
+        ],
+      );
+    });
+  }
   _addmarker() {
+    createAlertDialog(context);
     var marker = MarkerOptions(
         position: mapController.cameraPosition.target,
         icon: BitmapDescriptor.defaultMarker,
