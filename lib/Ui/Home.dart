@@ -10,9 +10,11 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:elmorshid/Ui/Reservation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 
 class Home extends StatefulWidget {
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -28,6 +30,8 @@ class stateHome extends State<Home> {
   Place place ;
   final FirebaseDatabase database = FirebaseDatabase();
   final GlobalKey<FormState> formkey = GlobalKey<FormState>() ;
+  final StorageReference firebaseStorageRef =
+  FirebaseStorage.instance.ref().child('image upload');
   DatabaseReference databasereference ;
 
   @override
@@ -127,41 +131,49 @@ class stateHome extends State<Home> {
     }
 
     return new Scaffold(
-      backgroundColor: Colors.deepPurple,
+      backgroundColor: Colors.white,
 
-      appBar: new AppBar(
-        title: new Text('Elmorshid'),
-        backgroundColor: Colors.deepPurple,
-      ),
+//      appBar: new AppBar(
+//        title: new Text('Elmorshid',
+//        style: TextStyle(
+//          color: Colors.black
+//        ),
+//        ),
+//        backgroundColor: Colors.white,
+//      ),
 
       bottomNavigationBar: new BottomNavigationBar(
         currentIndex: _cIndex,
         items: [
           new BottomNavigationBarItem(
-            icon: new Icon(Icons.home),
-            title: new Text('home'),
+            icon: new Icon(Icons.home , color: Colors.deepPurple,),
+            title: new Text('home',style:TextStyle(color: Colors.deepPurple),),
           ),
           new BottomNavigationBarItem(
-            icon: new Icon(Icons.place),
-            title: new Text('place'),
+            icon: new Icon(Icons.place, color: Colors.deepPurple),
+            title: new Text('place',style: TextStyle(color: Colors.deepPurple)),
+
           ),
           new BottomNavigationBarItem(
-            icon: new Icon(Icons.hotel),
-            title: new Text('reservation'),
+            icon: new Icon(Icons.hotel, color: Colors.deepPurple),
+            title: new Text('reservation',style: TextStyle(color: Colors.deepPurple)),
+
           ),
           new BottomNavigationBarItem(
-            icon: new Icon(Icons.map),
-            title: new Text('map'),
+            icon: new Icon(Icons.map, color: Colors.deepPurple),
+            title: new Text('map',style: TextStyle(color: Colors.deepPurple)),
+
           ),
         ],
         type: BottomNavigationBarType.fixed,
-        fixedColor: Colors.deepPurple,
+        fixedColor: Colors.white,
         onTap: navigationTapped,
       ),
       drawer: new Drawer(
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
+
          accountName: FutureBuilder(
                 future: FirebaseAuth.instance.currentUser(),
                 builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
@@ -240,14 +252,37 @@ class stateHome extends State<Home> {
         ),
       ),
       floatingActionButton: new FloatingActionButton(
-          onPressed: _setMessage ,
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => addPlace()),
+          ), 
         child: Icon(Icons.add_box , color: Colors.white)
       ),
 
      body:Column(
+       mainAxisAlignment: MainAxisAlignment.center,
        children: <Widget>[
+         SizedBox(height: 50.0,),
+         Center(
+           child: Text(
+             'El Morshid',
+               style: TextStyle(
+                   fontSize: 50.0,
+                   fontFamily: 'Pacifico',
+                   fontWeight: FontWeight.bold,
+                 color: Colors.deepPurpleAccent
+               )
+           ),
+
+         ),
+
          Flexible(
              child: FirebaseAnimatedList(
+                 reverse: true,
+                 padding: const EdgeInsets.only(top: 40.0 ,   left: 20.0 ,right:  20.0 ),
+                 controller: ScrollController(
+                   initialScrollOffset: 1.0 ,
+                 ),
                  query: databasereference,
                  itemBuilder: (_,DataSnapshot snapshot,Animation<double> animation , int index){
                    return new Card(
@@ -256,37 +291,43 @@ class stateHome extends State<Home> {
                      shape: RoundedRectangleBorder(
                        borderRadius: BorderRadius.circular(10.0),
                      ),
-                     elevation: 5,
+                     elevation: 0,
                      margin: EdgeInsets.all(10),
                      color: Colors.white,
                      child: Column(
                        mainAxisSize: MainAxisSize.min,
                        children: <Widget>[
-                         Image.asset(
-                           "assets/img/test.jpg",
-                           fit: BoxFit.cover,
-                         ),
+                         /*Image.asset(
+                           firebaseStorageRef.getDownloadURL().toString(),
+                           fit: BoxFit.none,
+                         ),*/
+                         Image.network('https://images.france.fr/zeaejvyq9bhj/2xwcRbXG0IoQIqw42g2w0C/094ea6f3777cc18f5e7cdee9168f5e3f/1120x490_Nature.jpg?w=1120&h=491&q=70&fl=progressive&fit=fill'),
                          ListTile(
-                           leading: Icon(Icons.visibility),
-                           title: Text(place_liste[index].title_place),
+                           leading: Icon(Icons.place),
+                           title: Text(place_liste[index].title_place ),
                            subtitle: Text(place_liste[index].discription_place),
+                          // onLongPress: ,
+                           onTap : () => Navigator.push(
+                             context,
+                             MaterialPageRoute(builder: (context) => Reservation()),
+                           ),
                          ),
                          ButtonTheme.bar(
                            // make buttons use the appropriate styles for cards
                            child: ButtonBar(
                              children: <Widget>[
-                               FlatButton(
-                                 child: const Text('BUY TICKETS'),
-                                 onPressed: () {
-                                   /* ... */
-                                 },
-                               ),
-                               FlatButton(
-                                 child: const Text('Visit'),
-                                 onPressed: () {
-                                   /* ... */
-                                 },
-                               ),
+//                               FlatButton(
+//                                 child: const Text('BUY TICKETS'),
+//                                 onPressed: () {
+//                                   /* ... */
+//                                 },
+//                               ),
+//                               FlatButton(
+//                                 child: const Text('Visit'),
+//                                 onPressed: () {
+//                                   /* ... */
+//                                 },
+//                               ),
                              ],
                            ),
                          ),

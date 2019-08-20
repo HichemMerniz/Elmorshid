@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:elmorshid/Ui/Reservation.dart';
 import 'package:elmorshid/Ui/Place.dart';
 import 'package:elmorshid/Ui/Map.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:elmorshid/Ui/Home.dart';
 
 class Reservation extends StatefulWidget{
@@ -61,9 +62,13 @@ class resrvState extends State<Reservation>{
         appBar: new AppBar(
           title: new Text('Reservation'),
         ),
-      bottomNavigationBar: new BottomNavigationBar(
-        currentIndex:  _cIndex,
+      body: WebView(
+        initialUrl: 'https://www.booking.com/index.fr.html?label=gen173nr-1BCAEoggI46AdIM1gEaECIAQGYAQ24ARnIAQ_YAQHoAQGIAgGoAgO4AvrmvugFwAIB;sid=3a4ebc25dfb2191ac7bb36b1a8fa3961;keep_landing=1&sb_price_type=total&',
+        javascriptMode: JavascriptMode.disabled,
+      ),
 
+      bottomNavigationBar: new BottomNavigationBar(
+        currentIndex: _cIndex,
         items:[
           new BottomNavigationBarItem(
             icon: new Icon(Icons.home),
@@ -90,7 +95,7 @@ class resrvState extends State<Reservation>{
 
 
       ),
-
     );
+
   }
 }

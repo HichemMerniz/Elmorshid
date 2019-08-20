@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:elmorshid/Models/place.dart';
+import 'package:elmorshid/Ui/Home.dart' ;
 import 'package:image_picker/image_picker.dart';
 
 class addPlace extends StatefulWidget {
@@ -21,6 +22,13 @@ class addpState extends State<addPlace> {
 
   Future getImage() async {
     var tempImage = await ImagePicker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      sampleImage = tempImage;
+    });
+  }
+  Future getPhoto() async {
+    var tempImage = await ImagePicker.pickImage(source: ImageSource.gallery);
 
     setState(() {
       sampleImage = tempImage;
@@ -86,15 +94,26 @@ class addpState extends State<addPlace> {
                         Icons.image,
                         color: Colors.white,
                       ),
+
                       color: Colors.green,
                     ),
-
+                    Text("OR")
+                    ,
+                    FlatButton(
+                      onPressed: getPhoto,
+                      child: Icon(
+                        Icons.camera,
+                        color: Colors.white,
+                      ),
+                      color: Colors.green,
+                    ),
                     FlatButton(
                         onPressed: sendData,
                         child: Text("send"),
                         color: Colors.pink,
                     ),
                     sampleImage == null ? Text('Select an image') : enableUpload(),
+
                   ],
                 ),
               ))
@@ -135,6 +154,12 @@ class addpState extends State<addPlace> {
               FirebaseStorage.instance.ref().child('image upload');
               final StorageUploadTask task =
               firebaseStorageRef.putFile(sampleImage);
+              var _img = firebaseStorageRef.getDownloadURL().toString() ;
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_img) => Home(),
+                  ));
 
             },
           )

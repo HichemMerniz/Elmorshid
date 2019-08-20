@@ -13,6 +13,7 @@ void main() {
         new MaterialApp(
           home: chargementPage(),
           debugShowCheckedModeBanner: false,
+          darkTheme: ThemeData.dark(),
           title: 'Elmorchid',
         )
     );

@@ -1,6 +1,14 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:elmorshid/Ui/Reservation.dart';
 import 'package:elmorshid/Ui/Place_Avitivity.dart';
+import 'package:elmorshid/Ui/addPlace.dart';
+import 'package:elmorshid/Models/place.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:elmorshid/Ui/Home.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
@@ -56,21 +64,48 @@ class mapState extends State<map> {
     });
   }
 
+
+
   Map<String, double> currentLocation = new Map();
   StreamSubscription<Map<String, double>> locationSubscription;
   Location location = new Location();
   String error;
+  List<Place> place_liste = List();
+  Place place;
+  final FirebaseDatabase database = FirebaseDatabase();
+  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  DatabaseReference databasereference;
   @override
   void initState() {
     super.initState();
     //default variables set is 0
-
+    place = new Place("","");
+    databasereference = database.reference().child("places");
+    databasereference.onChildAdded.listen(_onEntryAdd) ;
     initPlatformState();
     locationSubscription =
         location.onLocationChanged().listen((Map<String, double> result) {
       setState(() {
         currentLocation = result;
       });
+    });
+  }
+
+
+  File sampleImage;
+
+  Future getImage() async {
+    var tempImage = await ImagePicker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      sampleImage = tempImage;
+    });
+  }
+  Future getPhoto() async {
+    var tempImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      sampleImage = tempImage;
     });
   }
 
@@ -183,17 +218,95 @@ class mapState extends State<map> {
     return showDialog(context: context,builder: (context){
       return AlertDialog(
         title: Text('Add this position'),
-        content: TextField(
-          controller: mycontroller,
+
+        content: Column(
+            children: <Widget>[
+              Flexible(
+            flex: 0,
+            child: Form(
+              key: formkey,
+              child: Flex(
+                direction: Axis.vertical,
+                children: <Widget>[
+                  ListTile(
+                    leading: Icon(Icons.subject),
+                    title: TextFormField(
+                      decoration: InputDecoration(
+                          hintText: "Title"
+                      ),
+                      initialValue: "",
+                      onSaved: (val) => place.title_place = val,
+                      validator: (val) => val == "" ? val : null,
+                    ),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.description),
+                    title: TextFormField(
+                      decoration: InputDecoration(
+                          hintText: "Discription"
+                      ),
+                      initialValue: "",
+                      onSaved: (val) => place.discription_place = val,
+                      validator: (val) => val == "" ? val : null,
+                    ),
+                  ),
+                  FlatButton(
+                    onPressed: getImage,
+                    child: Icon(
+                      Icons.image,
+                      color: Colors.white,
+                    ),
+
+                    color: Colors.green,
+                  ),
+                  Text("OR")
+                  ,
+                  FlatButton(
+                    onPressed: getPhoto,
+                    child: Icon(
+                      Icons.camera,
+                      color: Colors.white,
+                    ),
+                    color: Colors.green,
+                  ),
+                  FlatButton(
+                    onPressed: sendData,
+                    child: Text("send"),
+                    color: Colors.pink,
+                  ),
+                  sampleImage == null ? Text('Select an image') : null,
+                ],
+              ),
+            )),]
         ),
         actions: <Widget>[
           MaterialButton(
             child: Text("Add"),
-            onPressed: () {},
-          ),
+            onPressed: () => Navigator.push(
+            context,
+      MaterialPageRoute(builder: (context) => addPlace()),
+          )
+
+          )
         ],
       );
     });
+  }
+
+
+  void _onEntryAdd(Event event) {
+    setState(() {
+      place_liste.add(Place.fromSnapshot(event.snapshot));
+    });
+  }
+
+  void sendData() {
+    final FormState form = formkey.currentState ;
+    if (form.validate()){
+      form.save() ;
+      form.reset();
+      databasereference.push().set(place.toJason()) ;
+    }
   }
   _addmarker() {
     createAlertDialog(context);
